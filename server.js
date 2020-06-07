@@ -1,9 +1,12 @@
 const express=require('express');
+const cors=require('cors');
 const bodyPaser=require('body-parser');
 const bcrypt =require('bcrypt-nodejs') ;
 
+
 const app=express();
 app.use(bodyPaser.json());
+app.use(cors());
 const database={ users:[
         {
             id:'123',
@@ -20,14 +23,7 @@ const database={ users:[
     password:'amine02',
     entries:0,
     joined: new Date()
-}],
-    loggin:[
-        {
-            id:'987',
-            hash:'',
-            email:'asotjrs@gmail.com'
-        }
-    ]
+}]
 
 };
 
@@ -41,7 +37,7 @@ app.post('/signin',(req,res)=>{
      //   console.log("is it the same ?",res)
    // });
     if (req.body.email===database.users[0].email && req.body.password===database.users[0].password)
-        res.json("authentication success !");
+        res.json("success");
     else
         res.status(400).json(' wrong password or email')
 
