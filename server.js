@@ -49,7 +49,36 @@ app.post('/register',(req,res)=>{
 
 });
 
+app.get('/profile/:id',(req,res)=>{
+    const {id}=req.params;
+    let found=false;
+    database.users.forEach(user=>{
+       if (id===user.id){
+           found=true;
+           return res.json(user)
+       }
 
+    });
+    if (!found)
+        res.status(404).json('not found')
+});
+app.put('/image',(req,res)=>{
+    const {id}=req.body;
+    let found=false;
+    database.users.forEach(user=>{
+        if (id===user.id){
+            found=true;
+            user.entries++;
+            return res.json(user)
+        }
+
+    });
+    if (!found)
+        res.status(404).json('not found')
+
+
+
+});
 app.listen(3000,()=>{
 
 console.log('app is running');
