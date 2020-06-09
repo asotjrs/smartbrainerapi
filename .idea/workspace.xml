@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="61bcaed5-a778-41e1-9054-ac003a39a434" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,7 +56,8 @@
       <updated>1591486820637</updated>
       <workItem from="1591486821844" duration="199000" />
       <workItem from="1591487377248" duration="7326000" />
-      <workItem from="1591553599736" duration="6717000" />
+      <workItem from="1591553599736" duration="11181000" />
+      <workItem from="1591635440800" duration="10748000" />
     </task>
     <servers />
   </component>
