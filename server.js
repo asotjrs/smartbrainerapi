@@ -2,7 +2,7 @@ const express=require('express');
 const cors=require('cors');
 const bodyPaser=require('body-parser');
 //const bcrypt =require('bcrypt-nodejs') ;
-const knex = require('knex')(
+const db = require('knex')(
     {
         client:'pg',
         connection:{
@@ -14,7 +14,6 @@ const knex = require('knex')(
     }
 );
 
-console.log(knex.select('*').from('users'));
 
 const app=express();
 app.use(bodyPaser.json());
@@ -60,46 +59,39 @@ app.post('/register',(req,res)=>{
     //bcrypt.hash(password, null, null, function(err, hash) {
         //console.log("my passwd encrypted",hash)
       //});
-   database.users.push({
-       id:'125',
-       name:name,
-       email:email,
-       password:password,
-       entries:0,
-       joined: new Date()
-   });
+    db('users').returning('*')
+        .insert({
+        name:name,
+        email:email,
+        joined:new Date()
+    }).then(response=>res.json(response)).catch(err=>console.log("there has been some errors while inserting data ino our db"));
 
-    res.json(database.users[database.users.length-1]);
 
 });
 
-app.get('/profile/:id',(req,res)=>{
+app.get('/profile/:id',(req,res)=> {
     const {id}=req.params;
-    let found=false;
-    database.users.forEach(user=>{
-       if (id===user.id){
-           found=true;
-           return res.json(user)
-       }
-
+    db.select('*').from('users').where({id}).then(users=> {
+        if(users.length)
+            res.json(users[0]);
+        else res.status(400).json('not found');
+    }).catch(err=>{
+        res.status(400).json('error getting user');
     });
-    if (!found)
-        res.status(404).json('not found')
-});
+
+}
+);
 
 app.put('/image',(req,res)=>{
     const {id}=req.body;
-    let found=false;
-    database.users.forEach(user=>{
-        if (id===user.id){
-            found=true;
-            user.entries++;
-            return res.json(user);
-        }
-
-    });
-    if (!found)
-        res.status(404).json('not found')
+    db('users').where('id','=',id).increment('entries').
+    returning('entries').
+    then(entries=>{
+        if(entries.length)
+        res.json(entries[0]);
+        else
+            res.status(400).json("no such a user");
+    }).catch(err=>res.status(400).json("error updating entries"));
 
 });
 
