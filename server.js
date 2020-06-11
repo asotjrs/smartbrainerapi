@@ -1,7 +1,7 @@
 const express=require('express');
 const cors=require('cors');
 const bodyPaser=require('body-parser');
-//const bcrypt =require('bcrypt-nodejs') ;
+const bcrypt =require('bcrypt-nodejs') ;
 const db = require('knex')(
     {
         client:'pg',
@@ -13,8 +13,6 @@ const db = require('knex')(
         }
     }
 );
-
-
 const app=express();
 app.use(bodyPaser.json());
 app.use(cors());
@@ -45,26 +43,41 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/signin',(req,res)=>{
+    const {email,password}=req.body;
+    db('login').select('*').where('email','=',email).then(
+        data=>{
+            const isValid=bcrypt.compareSync(password, data[0].hash);
+            if (isValid){
+               return  db.select('*').from('users').where('email','=',data[0].email).then(
+                    users=>{res.json(users[0])}
+                ).catch(err=> res.status(400).json("can not get user"));
+            }else {
+                res.status(400).json(" wrong credentials !!!");
+            }
+
+        }
+    ).catch(err=>res.status(400).json('user not signed in'));
     //bcrypt.compare("kk02", "$2a$10$qDVSyp8U9v8NEMF1Q/wZg.E.T.kGkJRtPx63q5T5H3Ih4eOd1uB4i", function(err, res) {
      //   console.log("is it the same ?",res)
    // });
-    if (req.body.email===database.users[0].email && req.body.password===database.users[0].password)
-        res.json(database.users[0]);
-    else
-        res.status(400).json(' wrong password or email')
+
 
 });
 app.post('/register',(req,res)=>{
    const {email, name ,password}=req.body;
-    //bcrypt.hash(password, null, null, function(err, hash) {
-        //console.log("my passwd encrypted",hash)
-      //});
-    db('users').returning('*')
-        .insert({
-        name:name,
-        email:email,
-        joined:new Date()
-    }).then(response=>res.json(response)).catch(err=>console.log("there has been some errors while inserting data ino our db"));
+   const hash = bcrypt.hashSync(password);
+   db.transaction(trx => {
+       trx.insert({hash:hash, email:email}).into('login').returning('email').
+           then(returnedEmail=>{
+           return trx('users').returning('*')
+               .insert({
+                   name:name,
+                   email:returnedEmail[0],
+                   joined:new Date()
+               }).then(users=>res.json(users[0]));
+       }).then(trx.commit).catch(trx.rollback)
+
+   }).catch(err=>res.status(400).json("unable to register"));
 
 
 });
@@ -100,9 +113,7 @@ app.put('/image',(req,res)=>{
 //bcrypt.compare("bacon", hash, function(err, res) {
     // res == true
 //});
-//bcrypt.compare("veggies", hash, function(err, res) {
-    // res = false
-//});
+
 app.listen(3000,()=>{
 
 console.log('app is running');
