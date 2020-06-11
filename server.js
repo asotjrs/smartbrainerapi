@@ -43,10 +43,11 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/signin',(req,res)=>{
-    const {email,password}=req.body;
-    db('login').select('*').where('email','=',email).then(
+    db.select('*').where('email','=',req.body.email).from('login').then(
         data=>{
-            const isValid=bcrypt.compareSync(password, data[0].hash);
+            const isValid=bcrypt.compareSync(req.body.password, data[0].hash);
+
+            console.log(req.body);
             if (isValid){
                return  db.select('*').from('users').where('email','=',data[0].email).then(
                     users=>{res.json(users[0])}
@@ -65,7 +66,7 @@ app.post('/signin',(req,res)=>{
 });
 app.post('/register',(req,res)=>{
    const {email, name ,password}=req.body;
-   const hash = bcrypt.hashSync(password);
+   var hash = bcrypt.hashSync(password);
    db.transaction(trx => {
        trx.insert({hash:hash, email:email}).into('login').returning('email').
            then(returnedEmail=>{
@@ -110,7 +111,7 @@ app.put('/image',(req,res)=>{
 
 
 // Load hash from your password DB.
-//bcrypt.compare("bacon", hash, function(err, res) {
+//bcrypt.compare("", hash, function(err, res) {
     // res == true
 //});
 
