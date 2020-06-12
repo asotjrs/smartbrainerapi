@@ -42,7 +42,7 @@ const database={ users:[
 
 app.get('/',(req,res)=>{
 
-    res.send(database.users)
+    res.send("it's workiiiiiiiiiiiiiiiiiiing !!!!!!!!")
 
 });
 
