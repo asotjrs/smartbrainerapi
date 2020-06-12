@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61bcaed5-a778-41e1-9054-ac003a39a434" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/image.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/profile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/signIn.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/image.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/signIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/signIn.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +62,7 @@
       <workItem from="1591635440800" duration="10975000" />
       <workItem from="1591739052990" duration="3999000" />
       <workItem from="1591811082433" duration="15481000" />
-      <workItem from="1591893067628" duration="8381000" />
+      <workItem from="1591893067628" duration="13956000" />
     </task>
     <servers />
   </component>

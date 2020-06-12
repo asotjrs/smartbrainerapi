@@ -3,6 +3,8 @@
 const handleRegister=(db,bcrypt)=>(req,res)=>{
 
     const {email, name ,password}=req.body;
+    if (!email || !name || !password)
+        return res.status(400).json("can't register with blank fields");
 
     bcrypt.hash(password, 10, function(err, hash) {
 
@@ -20,10 +22,6 @@ const handleRegister=(db,bcrypt)=>(req,res)=>{
         }).catch(err=>res.status(400).json("unable to register"));
 
     });
-
-
-
-
 
 
 };
