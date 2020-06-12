@@ -52,6 +52,7 @@ app.post('/register',register.handleRegister(db,bcrypt));
 app.get('/profile/:id',profile.handleProfile(db));
 
 app.put('/image',image.handleImage(db));
+app.post('/imageUrl',image.handleInputImage);
 
 
 // Load hash from your password DB.
@@ -59,8 +60,9 @@ app.put('/image',image.handleImage(db));
     // res == true
 //});
 
-app.listen(3000,()=>{
+PORT=process.env.PORT;
+app.listen(PORT,()=>{
 
-console.log('app is running');
+console.log('app is running on port '+PORT);
 
 });
