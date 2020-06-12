@@ -60,9 +60,9 @@ app.post('/imageUrl',image.handleInputImage);
     // res == true
 //});
 
-PORT=process.env.PORT;
-app.listen(PORT,()=>{
 
-console.log('app is running on port '+PORT);
+app.listen(process.env.PORT || 3000,()=>{
+
+console.log('app is running on port '+process.env.PORT);
 
 });
