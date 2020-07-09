@@ -37,9 +37,10 @@ app.post('/imageUrl',image.handleInputImage);
 
 
 
+const PORT = process.env.PORT || config.httpPort;
 
-app.listen((process.env.PORT || 3000),()=>{
+app.listen((PORT || 3000),()=>{
 
-console.log('app is running on port '+process.env.PORT);
+console.log('app is running on port '+PORT);
 
 });
