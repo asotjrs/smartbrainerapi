@@ -17,7 +17,7 @@ const handleImage=(db)=>(req,res)=>{
 
     const {id}=req.body;
     db('users').where('id','=',id).increment('entries').
-    returning('*').
+    returning('entries').
     then(entries=>{
         if(entries.length){
 
