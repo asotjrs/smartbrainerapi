@@ -5,7 +5,7 @@ const handleSignIn=(db,bcrypt)=>(req,res)=>{
     if (!email || !password)
         return res.status(400).json("can't sign in with blank fields");
 
-    db.select('*').where('email','=',email).from('login').then(
+    db.select('*').from('login').where('email','=',email).then(
         data=>{
             bcrypt.compare(password, data[0].hash, function(err, result) {
 

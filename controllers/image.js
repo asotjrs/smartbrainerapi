@@ -24,7 +24,7 @@ const handleImage=(db)=>(req,res)=>{
             res.json(entries[0]);
         } else
             res.status(400).json("no such a user");
-    }).catch(err=>res.status(400).json("Register to see your rank"));
+    }).catch(err=>res.status(400).json(""));
 
 
 };
