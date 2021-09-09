@@ -1,6 +1,7 @@
 const Clarifai=require('clarifai');
 
 const app=new Clarifai.App({
+//please note that this is a free API KEY provided by clarifai for testing, in production mode  this will be added as an ENV
     apiKey:'86511659890d4d389ed08b9471114250'
 });
 const handleInputImage=(req,res)=>{
